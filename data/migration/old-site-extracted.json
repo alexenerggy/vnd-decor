@@ -1,0 +1,155 @@
+{
+  "source": {
+    "root": "old_site/",
+    "analyzedAt": "2026-03-13",
+    "files": [
+      "old_site/index.htm",
+      "old_site/agree.html",
+      "old_site/thanks.html",
+      "old_site/setting.js",
+      "old_site/.htaccess"
+    ]
+  },
+  "contacts": {
+    "phones": [
+      {
+        "display": "8-985-684-66-16",
+        "normalized": "+7-985-684-66-16",
+        "source": "old_site/index.htm"
+      }
+    ],
+    "emails": [
+      {
+        "value": "info@ezhevika-studio.ru",
+        "source": "old_site/agree.html",
+        "status": "legacy_email_needs_manual_replace"
+      }
+    ],
+    "messengers": [
+      {
+        "type": "telegram",
+        "url": "https://t.me/lera_volna",
+        "source": "old_site/index.htm"
+      },
+      {
+        "type": "whatsapp",
+        "url": "https://wa.me/79856846616",
+        "source": "old_site/index.htm"
+      },
+      {
+        "type": "max",
+        "url": "https://max.ru/u/f9LHodD0cOJmyBDfV4eHe4LwAkQ8FbBzrPyHkfy8-fcYUwo1VJOqH57QmE8",
+        "source": "old_site/index.htm"
+      }
+    ]
+  },
+  "services": [
+    {
+      "title": "Декор президиума",
+      "mappedRoute": "/prezidium-na-svadbu",
+      "startingPriceLegacy": "от 20 тыс руб.",
+      "source": "old_site/index.htm"
+    },
+    {
+      "title": "Выездная регистрация",
+      "mappedRoute": "/oformlenie-vyezdnoy-registratsii",
+      "startingPriceLegacy": "от 18 тыс руб.",
+      "source": "old_site/index.htm"
+    },
+    {
+      "title": "Свадебная флористика",
+      "mappedRoute": "/svadebnaya-floristika",
+      "startingPriceLegacy": "от 2,5 тыс руб.",
+      "source": "old_site/index.htm"
+    },
+    {
+      "title": "Фотозона",
+      "mappedRoute": "/fotozona-na-svadbu",
+      "startingPriceLegacy": "от 15 тыс руб.",
+      "source": "old_site/index.htm"
+    },
+    {
+      "title": "Оформление шарами",
+      "mappedRoute": "/oformlenie-zala-sharami-na-svadbu",
+      "startingPriceLegacy": "от 150 руб.",
+      "source": "old_site/index.htm"
+    },
+    {
+      "title": "Аксессуары и полиграфия",
+      "mappedRoute": null,
+      "startingPriceLegacy": "от 80 руб.",
+      "status": "secondary_content_candidate",
+      "source": "old_site/index.htm"
+    }
+  ],
+  "semanticBlocks": {
+    "hero": {
+      "headline": "Волшебно оформим свадьбу. Сохраним бюджет от ненужных трат.",
+      "cta": "Получите 3 варианта концепта и сметы"
+    },
+    "trust": [
+      "уже более 200 молодоженов выбрали нас",
+      "работаем с любым бюджетом, масштабом и сложностью",
+      "разработка единого стиля всей свадьбы",
+      "официальный договор с детализацией заказа"
+    ],
+    "process": [
+      "Заявка",
+      "Встреча с дизайнером, обсуждение пожеланий",
+      "Повторная встреча, получение эскизов, заключение договора",
+      "Наслаждайтесь праздником"
+    ],
+    "offers": [
+      "При заказе оформления зала под ключ: план рассадки в подарок",
+      "Оформляем до 4 свадеб в месяц"
+    ],
+    "reviews": {
+      "format": "image_reviews",
+      "count": 4
+    },
+    "portfolio": {
+      "format": "gallery_images",
+      "count": 35
+    },
+    "thanksPage": [
+      "Благодарим за оставленную заявку",
+      "В ближайшее время менеджер свяжется с Вами"
+    ]
+  },
+  "legal": {
+    "consentSource": "old_site/agree.html",
+    "status": "extracted_to_content_legal",
+    "notes": [
+      "Contains legacy domain ezhevika-studio.ru",
+      "Contains legacy email info@ezhevika-studio.ru",
+      "Manual legal review required before production"
+    ]
+  },
+  "assets": {
+    "favicon": {
+      "source": "old_site/favicon.ico",
+      "target": "public/favicon.ico"
+    },
+    "verificationFiles": {
+      "found": [],
+      "note": "No search-engine verification files found in old_site root"
+    },
+    "copiedToPublicLegacy": {
+      "portfolioWebp": 35,
+      "feedbackImages": 4,
+      "howWorkImages": 4,
+      "serviceImages": 6,
+      "brandAssets": 4,
+      "backgroundAssets": 6,
+      "targetRoot": "public/images/legacy"
+    }
+  },
+  "doNotMigrate": [
+    "legacy HTML layout and bootstrap grid from old_site/index.htm",
+    "jQuery plugins (fancybox, mosaicflow, owl, validate)",
+    "PHP form handlers (send.php, mail147.php)",
+    "old one-page anchor architecture",
+    "legacy JS effects (wow/skrollr/timer/custom scripts)",
+    "third-party counters/pixels from old scripts without fresh analytics plan"
+  ]
+}

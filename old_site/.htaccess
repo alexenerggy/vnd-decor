@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# --- Ваш редирект на HTTPS ---
+RewriteCond %{HTTP_HOST} ^(www\.)?ezhevika-studio\.ru$ [NC]
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteRule ^(.*)$ https://ezhevika-studio.ru/$1 [R=301,L]

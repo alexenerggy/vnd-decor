@@ -1,0 +1,11 @@
+{
+  "source": "old_site/index.htm",
+  "candidates": [
+    {
+      "title": "Аксессуары и полиграфия",
+      "legacyStartingPrice": "от 80 руб.",
+      "recommendedPlacement": "blog_or_secondary_service_page",
+      "status": "not_created_as_route_on_launch"
+    }
+  ]
+}
