@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дизайн-превью — Ежевика Студия</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: #f0ece8;
+      color: #1a1a1a;
+    }
+
+    /* ─── Layout ─── */
+    .page-header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: #fff;
+      border-bottom: 1px solid #e0dbd5;
+    }
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      letter-spacing: 0.02em;
+      color: #1a1a1a;
+    }
+    .page-header p {
+      margin-top: 10px;
+      color: #777;
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    .variant-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 28px 20px 0;
+      position: sticky;
+      top: 0;
+      background: #f0ece8;
+      z-index: 100;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 16px;
+    }
+    .tab-btn {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .tab-btn.a { background: #C9956C; color: #fff; }
+    .tab-btn.b { background: #A67C52; color: #fff; }
+    .tab-btn.c { background: #7B6B9B; color: #fff; }
+    .tab-btn.d { background: #6B3F5E; color: #fff; }
+    .tab-btn:not(.active) { opacity: 0.45; }
+    .tab-btn:hover { opacity: 1; transform: translateY(-1px); }
+
+    .variant { display: none; }
+    .variant.active { display: block; }
+
+    /* ─── Variant Wrapper ─── */
+    .variant-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .swatch {
+      flex: 1;
+      height: 80px;
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-end;
+      padding: 8px 12px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Demo Card ─── */
+    .demo-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 700px) { .demo-section { grid-template-columns: 1fr; } }
+
+    .demo-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    /* Hero block */
+    .hero-demo {
+      padding: 48px 36px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .hero-demo .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+    .hero-demo h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero-demo p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 340px;
+    }
+    .btn-demo {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+
+    /* Service cards */
+    .services-demo {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .services-demo h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+    .service-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+    }
+    .service-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .service-item .name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .service-item .price {
+      font-size: 0.78rem;
+      font-weight: 300;
+      margin-top: 2px;
+    }
+
+    /* Typography demo */
+    .typo-demo {
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .typo-demo .label {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.45;
+      margin-bottom: -10px;
+    }
+    .typo-h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; line-height: 1.1; }
+    .typo-h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; }
+    .typo-italic { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; }
+    .typo-body { font-family: 'Jost', sans-serif; font-size: 0.95rem; font-weight: 300; line-height: 1.75; }
+    .typo-btn { font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+
+    /* Benefits row */
+    .benefits-demo {
+      padding: 32px;
+      grid-column: span 2;
+    }
+    @media (max-width: 700px) { .benefits-demo { grid-column: span 1; } }
+    .benefits-demo h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .benefits-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .benefit-card {
+      flex: 1;
+      min-width: 140px;
+      padding: 20px 16px;
+      border-radius: 14px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .benefit-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .benefit-text {
+      font-size: 0.78rem;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Divider */
+    .section-label {
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin: 40px 0 20px;
+      opacity: 0.5;
+    }
+
+    /* ════════════════════════════════════
+       VARIANT A — Пудровая роскошь
+    ════════════════════════════════════ */
+    #variant-a .demo-card { background: #FBF7F4; }
+    #variant-a .hero-demo {
+      background: linear-gradient(135deg, #2C1810 0%, #4A2C1A 100%);
+      color: #FBF7F4;
+    }
+    #variant-a .hero-demo .badge { background: rgba(201,149,108,0.25); color: #E8D5C4; border: 1px solid rgba(201,149,108,0.4); }
+    #variant-a .hero-demo h2 { color: #FBF7F4; }
+    #variant-a .hero-demo p { color: rgba(251,247,244,0.75); }
+    #variant-a .hero-demo .btn-demo { background: #C9956C; color: #fff; }
+    #variant-a .services-demo { background: #FBF7F4; }
+    #variant-a .services-demo h3 { color: #2C1810; }
+    #variant-a .service-item { background: #F2EDE8; }
+    #variant-a .service-icon { background: rgba(201,149,108,0.15); color: #C9956C; }
+    #variant-a .service-item .name { color: #2C1810; }
+    #variant-a .service-item .price { color: #C9956C; }
+    #variant-a .typo-demo { background: #FBF7F4; }
+    #variant-a .typo-h1, #variant-a .typo-h2 { color: #2C1810; }
+    #variant-a .typo-italic { color: #C9956C; }
+    #variant-a .typo-body { color: #5A4030; }
+    #variant-a .typo-btn { color: #C9956C; }
+    #variant-a .benefits-demo { background: #F2EDE8; }
+    #variant-a .benefits-demo h3 { color: #2C1810; }
+    #variant-a .benefit-card { background: #FBF7F4; }
+    #variant-a .benefit-num { color: #C9956C; }
+    #variant-a .benefit-text { color: #5A4030; }
+
+    /* ════════════════════════════════════
+       VARIANT B — Современная свадьба
+    ════════════════════════════════════ */
+    #variant-b .demo-card { background: #F9F6F3; }
+    #variant-b .hero-demo {
+      background: linear-gradient(135deg, #1A1A2E 0%, #2D2D4A 100%);
+      color: #F9F6F3;
+    }
+    #variant-b .hero-demo .badge { background: rgba(166,124,82,0.2); color: #D4B8A0; border: 1px solid rgba(166,124,82,0.4); }
+    #variant-b .hero-demo h2 { color: #F9F6F3; }
+    #variant-b .hero-demo p { color: rgba(249,246,243,0.7); }
+    #variant-b .hero-demo .btn-demo {
+      background: linear-gradient(90deg, #A67C52, #C49A6C);
+      color: #fff;
+    }
+    #variant-b .services-demo { background: #F9F6F3; }
+    #variant-b .services-demo h3 { color: #1A1A2E; }
+    #variant-b .service-item { background: #EDE8E2; }
+    #variant-b .service-icon { background: rgba(166,124,82,0.12); color: #A67C52; }
+    #variant-b .service-item .name { color: #1A1A2E; }
+    #variant-b .service-item .price { color: #A67C52; }
+    #variant-b .typo-demo { background: #F9F6F3; }
+    #variant-b .typo-h1, #variant-b .typo-h2 { color: #1A1A2E; }
+    #variant-b .typo-italic { color: #A67C52; }
+    #variant-b .typo-body { color: #4A4A5A; }
+    #variant-b .typo-btn { color: #A67C52; }
+    #variant-b .benefits-demo { background: #EDE8E2; }
+    #variant-b .benefits-demo h3 { color: #1A1A2E; }
+    #variant-b .benefit-card { background: #F9F6F3; }
+    #variant-b .benefit-num { color: #A67C52; }
+    #variant-b .benefit-text { color: #4A4A5A; }
+
+    /* ════════════════════════════════════
+       VARIANT C — Лавандовый шик
+    ════════════════════════════════════ */
+    #variant-c .demo-card { background: #FAFAFA; }
+    #variant-c .hero-demo {
+      background: linear-gradient(135deg, #1C1C2E 0%, #2E2840 100%);
+      color: #FAFAFA;
+    }
+    #variant-c .hero-demo .badge { background: rgba(123,107,155,0.25); color: #E8E0F0; border: 1px solid rgba(123,107,155,0.45); }
+    #variant-c .hero-demo h2 { color: #FAFAFA; }
+    #variant-c .hero-demo p { color: rgba(250,250,250,0.7); }
+    #variant-c .hero-demo .btn-demo { background: #7B6B9B; color: #fff; }
+    #variant-c .services-demo { background: #FAFAFA; }
+    #variant-c .services-demo h3 { color: #1C1C2E; }
+    #variant-c .service-item { background: #F0ECF8; }
+    #variant-c .service-icon { background: rgba(123,107,155,0.12); color: #7B6B9B; }
+    #variant-c .service-item .name { color: #1C1C2E; }
+    #variant-c .service-item .price { color: #7B6B9B; }
+    #variant-c .typo-demo { background: #FAFAFA; }
+    #variant-c .typo-h1, #variant-c .typo-h2 { color: #1C1C2E; }
+    #variant-c .typo-italic { color: #7B6B9B; }
+    #variant-c .typo-body { color: #3A3A4E; }
+    #variant-c .typo-btn { color: #7B6B9B; }
+    #variant-c .benefits-demo { background: #F0ECF8; }
+    #variant-c .benefits-demo h3 { color: #1C1C2E; }
+    #variant-c .benefit-card { background: #FAFAFA; }
+    #variant-c .benefit-num { color: #7B6B9B; }
+    #variant-c .benefit-text { color: #3A3A4E; }
+
+    /* ════════════════════════════════════
+       VARIANT D — Ежевичный
+    ════════════════════════════════════ */
+    #variant-d .demo-card { background: #FDF9FB; }
+    #variant-d .hero-demo {
+      background: linear-gradient(135deg, #1A0A1A 0%, #3D1A3A 100%);
+      color: #FDF9FB;
+    }
+    #variant-d .hero-demo .badge { background: rgba(107,63,94,0.3); color: #E8C8E0; border: 1px solid rgba(107,63,94,0.5); }
+    #variant-d .hero-demo h2 { color: #FDF9FB; }
+    #variant-d .hero-demo p { color: rgba(253,249,251,0.72); }
+    #variant-d .hero-demo .btn-demo { background: linear-gradient(90deg, #6B3F5E, #9B5A8A); color: #fff; }
+    #variant-d .services-demo { background: #FDF9FB; }
+    #variant-d .services-demo h3 { color: #1A0A1A; }
+    #variant-d .service-item { background: #F5EBF3; }
+    #variant-d .service-icon { background: rgba(107,63,94,0.12); color: #6B3F5E; }
+    #variant-d .service-item .name { color: #1A0A1A; }
+    #variant-d .service-item .price { color: #9B5A8A; }
+    #variant-d .typo-demo { background: #FDF9FB; }
+    #variant-d .typo-h1, #variant-d .typo-h2 { color: #1A0A1A; }
+    #variant-d .typo-italic { color: #9B5A8A; }
+    #variant-d .typo-body { color: #3D1A3A; }
+    #variant-d .typo-btn { color: #6B3F5E; }
+    #variant-d .benefits-demo { background: #F5EBF3; }
+    #variant-d .benefits-demo h3 { color: #1A0A1A; }
+    #variant-d .benefit-card { background: #FDF9FB; }
+    #variant-d .benefit-num { color: #9B5A8A; }
+    #variant-d .benefit-text { color: #3D1A3A; }
+
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Превью цветовых вариантов</h1>
+  <p>Ezhevika Studio — редизайн лендинга 2025</p>
+</div>
+
+<div class="variant-tabs">
+  <button class="tab-btn a active" onclick="showVariant('a', this)">A — Пудровая роскошь</button>
+  <button class="tab-btn b" onclick="showVariant('b', this)">B — Современная свадьба</button>
+  <button class="tab-btn c" onclick="showVariant('c', this)">C — Лавандовый шик</button>
+  <button class="tab-btn d" onclick="showVariant('d', this)">D — Ежевичный</button>
+</div>
+
+<!-- ══════════ VARIANT A ══════════ -->
+<div id="variant-a" class="variant active">
+  <div class="variant-wrap">
+
+    <!-- Palette -->
+    <div class="palette-row">
+      <div class="swatch" style="background:#C9956C;color:#fff;">#C9956C<br>Золото</div>
+      <div class="swatch" style="background:#E8D5C4;color:#5A4030;">#E8D5C4<br>Пыльная роза</div>
+      <div class="swatch" style="background:#FBF7F4;color:#5A4030;border:1px solid #e0dbd5;">#FBF7F4<br>Тёплый белый</div>
+      <div class="swatch" style="background:#2C1810;color:#fff;">#2C1810<br>Тёмно-коричневый</div>
+      <div class="swatch" style="background:#F2EDE8;color:#5A4030;border:1px solid #e0dbd5;">#F2EDE8<br>Фоновый</div>
+    </div>
+
+    <div class="demo-section">
+      <!-- Hero -->
+      <div class="demo-card">
+        <div class="hero-demo">
+          <div class="badge">Студия декора · Москва</div>
+          <h2>Волшебно оформим<br>вашу свадьбу</h2>
+          <p>Сохраним бюджет от ненужных трат. Уже более 200 пар выбрали нас.</p>
+          <button class="btn-demo">Получить 3 концепта</button>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="demo-card">
+        <div class="services-demo">
+          <h3>Наши услуги</h3>
+          <div class="service-item">
+            <div class="service-icon">🌸</div>
+            <div>
+              <div class="name">Оформление президиума</div>
+              <div class="price">от 20 000 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">💐</div>
+            <div>
+              <div class="name">Свадебная флористика</div>
+              <div class="price">от 2 500 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🎀</div>
+            <div>
+              <div class="name">Выездная регистрация</div>
+              <div class="price">от 18 000 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🎈</div>
+            <div>
+              <div class="name">Воздушные шары</div>
+              <div class="price">от 150 ₽</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typography -->
+      <div class="demo-card">
+        <div class="typo-demo">
+          <div class="label">Шрифты</div>
+          <div class="typo-h1">Ежевика<br>Студия</div>
+          <div class="typo-h2">Cormorant Garamond</div>
+          <div class="typo-italic">«Ваша свадьба — наше искусство»</div>
+          <div class="typo-body">Мы создаём неповторимый декор, который отражает вашу историю любви. Работаем с любым бюджетом и стилем.</div>
+          <div class="typo-btn">Jost 500 · кнопки и метки</div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="demo-card" style="background:#FBF7F4;padding:32px;display:flex;flex-direction:column;gap:16px;justify-content:center;align-items:flex-start;">
+        <div style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;opacity:0.45;font-family:'Jost',sans-serif;">Кнопки и акценты</div>
+        <button class="btn-demo" style="background:#C9956C;color:#fff;">Получить концепт</button>
+        <button class="btn-demo" style="background:transparent;border:2px solid #C9956C;color:#C9956C;">Смотреть портфолио</button>
+        <button class="btn-demo" style="background:#2C1810;color:#fff;">Оставить заявку</button>
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <span style="display:inline-block;width:36px;height:36px;border-radius:50%;background:#C9956C;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;">✦</span>
+          <span style="display:inline-block;width:36px;height:36px;border-radius:50%;background:#E8D5C4;display:flex;align-items:center;justify-content:center;color:#C9956C;font-size:0.8rem;">▶</span>
+          <span style="display:inline-block;width:36px;height:36px;border-radius:50%;border:2px solid #C9956C;display:flex;align-items:center;justify-content:center;color:#C9956C;font-size:0.8rem;">✉</span>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="demo-card benefits-demo">
+        <h3>Почему выбирают нас</h3>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-num">01</div>
+            <div class="benefit-text">Встреча в удобном месте</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">02</div>
+            <div class="benefit-text">Любой бюджет и стиль</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">03</div>
+            <div class="benefit-text">Единая стилистика</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">04</div>
+            <div class="benefit-text">Договор с подробной сметой</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">05</div>
+            <div class="benefit-text">Более 200 довольных пар</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VARIANT B ══════════ -->
+<div id="variant-b" class="variant">
+  <div class="variant-wrap">
+    <div class="palette-row">
+      <div class="swatch" style="background:#A67C52;color:#fff;">#A67C52<br>Бронза</div>
+      <div class="swatch" style="background:#D4B8A0;color:#1A1A2E;">#D4B8A0<br>Капучино</div>
+      <div class="swatch" style="background:#F9F6F3;color:#4A4A5A;border:1px solid #e0dbd5;">#F9F6F3<br>Кремовый</div>
+      <div class="swatch" style="background:#1A1A2E;color:#fff;">#1A1A2E<br>Почти чёрный</div>
+      <div class="swatch" style="background:#EDE8E2;color:#4A4A5A;border:1px solid #ddd;">#EDE8E2<br>Фоновый</div>
+    </div>
+
+    <div class="demo-section">
+      <div class="demo-card">
+        <div class="hero-demo">
+          <div class="badge">Студия декора · Москва</div>
+          <h2>Волшебно оформим<br>вашу свадьбу</h2>
+          <p>Сохраним бюджет от ненужных трат. Уже более 200 пар выбрали нас.</p>
+          <button class="btn-demo">Получить 3 концепта</button>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="services-demo">
+          <h3>Наши услуги</h3>
+          <div class="service-item">
+            <div class="service-icon">🌸</div>
+            <div>
+              <div class="name">Оформление президиума</div>
+              <div class="price">от 20 000 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">💐</div>
+            <div>
+              <div class="name">Свадебная флористика</div>
+              <div class="price">от 2 500 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🎀</div>
+            <div>
+              <div class="name">Выездная регистрация</div>
+              <div class="price">от 18 000 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🎈</div>
+            <div>
+              <div class="name">Воздушные шары</div>
+              <div class="price">от 150 ₽</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="typo-demo">
+          <div class="label">Шрифты</div>
+          <div class="typo-h1">Ежевика<br>Студия</div>
+          <div class="typo-h2">Cormorant Garamond</div>
+          <div class="typo-italic">«Ваша свадьба — наше искусство»</div>
+          <div class="typo-body">Мы создаём неповторимый декор, который отражает вашу историю любви. Работаем с любым бюджетом и стилем.</div>
+          <div class="typo-btn">Jost 500 · кнопки и метки</div>
+        </div>
+      </div>
+
+      <div class="demo-card" style="background:#F9F6F3;padding:32px;display:flex;flex-direction:column;gap:16px;justify-content:center;align-items:flex-start;">
+        <div style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;opacity:0.45;font-family:'Jost',sans-serif;">Кнопки и акценты</div>
+        <button class="btn-demo" style="background:linear-gradient(90deg,#A67C52,#C49A6C);color:#fff;">Получить концепт</button>
+        <button class="btn-demo" style="background:transparent;border:2px solid #A67C52;color:#A67C52;">Смотреть портфолио</button>
+        <button class="btn-demo" style="background:#1A1A2E;color:#fff;">Оставить заявку</button>
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <span style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#A67C52,#C49A6C);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;">✦</span>
+          <span style="width:36px;height:36px;border-radius:50%;background:#D4B8A0;display:flex;align-items:center;justify-content:center;color:#A67C52;font-size:0.8rem;">▶</span>
+          <span style="width:36px;height:36px;border-radius:50%;border:2px solid #A67C52;display:flex;align-items:center;justify-content:center;color:#A67C52;font-size:0.8rem;">✉</span>
+        </div>
+      </div>
+
+      <div class="demo-card benefits-demo">
+        <h3>Почему выбирают нас</h3>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-num">01</div>
+            <div class="benefit-text">Встреча в удобном месте</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">02</div>
+            <div class="benefit-text">Любой бюджет и стиль</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">03</div>
+            <div class="benefit-text">Единая стилистика</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">04</div>
+            <div class="benefit-text">Договор с подробной сметой</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">05</div>
+            <div class="benefit-text">Более 200 довольных пар</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VARIANT C ══════════ -->
+<div id="variant-c" class="variant">
+  <div class="variant-wrap">
+    <div class="palette-row">
+      <div class="swatch" style="background:#7B6B9B;color:#fff;">#7B6B9B<br>Лаванда</div>
+      <div class="swatch" style="background:#E8E0F0;color:#1C1C2E;">#E8E0F0<br>Светло-лиловый</div>
+      <div class="swatch" style="background:#FAFAFA;color:#3A3A4E;border:1px solid #e0e0e0;">#FAFAFA<br>Чистый белый</div>
+      <div class="swatch" style="background:#1C1C2E;color:#fff;">#1C1C2E<br>Тёмно-синий</div>
+      <div class="swatch" style="background:#F0ECF8;color:#3A3A4E;border:1px solid #ddd;">#F0ECF8<br>Фоновый</div>
+    </div>
+
+    <div class="demo-section">
+      <div class="demo-card">
+        <div class="hero-demo">
+          <div class="badge">Студия декора · Москва</div>
+          <h2>Волшебно оформим<br>вашу свадьбу</h2>
+          <p>Сохраним бюджет от ненужных трат. Уже более 200 пар выбрали нас.</p>
+          <button class="btn-demo">Получить 3 концепта</button>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="services-demo">
+          <h3>Наши услуги</h3>
+          <div class="service-item">
+            <div class="service-icon">🌸</div>
+            <div>
+              <div class="name">Оформление президиума</div>
+              <div class="price">от 20 000 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">💐</div>
+            <div>
+              <div class="name">Свадебная флористика</div>
+              <div class="price">от 2 500 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🎀</div>
+            <div>
+              <div class="name">Выездная регистрация</div>
+              <div class="price">от 18 000 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🎈</div>
+            <div>
+              <div class="name">Воздушные шары</div>
+              <div class="price">от 150 ₽</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="typo-demo">
+          <div class="label">Шрифты</div>
+          <div class="typo-h1">Ежевика<br>Студия</div>
+          <div class="typo-h2">Cormorant Garamond</div>
+          <div class="typo-italic">«Ваша свадьба — наше искусство»</div>
+          <div class="typo-body">Мы создаём неповторимый декор, который отражает вашу историю любви. Работаем с любым бюджетом и стилем.</div>
+          <div class="typo-btn">Jost 500 · кнопки и метки</div>
+        </div>
+      </div>
+
+      <div class="demo-card" style="background:#FAFAFA;padding:32px;display:flex;flex-direction:column;gap:16px;justify-content:center;align-items:flex-start;">
+        <div style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;opacity:0.45;font-family:'Jost',sans-serif;">Кнопки и акценты</div>
+        <button class="btn-demo" style="background:#7B6B9B;color:#fff;">Получить концепт</button>
+        <button class="btn-demo" style="background:transparent;border:2px solid #7B6B9B;color:#7B6B9B;">Смотреть портфолио</button>
+        <button class="btn-demo" style="background:#1C1C2E;color:#fff;">Оставить заявку</button>
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <span style="width:36px;height:36px;border-radius:50%;background:#7B6B9B;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;">✦</span>
+          <span style="width:36px;height:36px;border-radius:50%;background:#E8E0F0;display:flex;align-items:center;justify-content:center;color:#7B6B9B;font-size:0.8rem;">▶</span>
+          <span style="width:36px;height:36px;border-radius:50%;border:2px solid #7B6B9B;display:flex;align-items:center;justify-content:center;color:#7B6B9B;font-size:0.8rem;">✉</span>
+        </div>
+      </div>
+
+      <div class="demo-card benefits-demo">
+        <h3>Почему выбирают нас</h3>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-num">01</div>
+            <div class="benefit-text">Встреча в удобном месте</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">02</div>
+            <div class="benefit-text">Любой бюджет и стиль</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">03</div>
+            <div class="benefit-text">Единая стилистика</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">04</div>
+            <div class="benefit-text">Договор с подробной сметой</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">05</div>
+            <div class="benefit-text">Более 200 довольных пар</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ VARIANT D ══════════ -->
+<div id="variant-d" class="variant">
+  <div class="variant-wrap">
+    <div class="palette-row">
+      <div class="swatch" style="background:#6B3F5E;color:#fff;">#6B3F5E<br>Ежевика тёмная</div>
+      <div class="swatch" style="background:#9B5A8A;color:#fff;">#9B5A8A<br>Ежевика светлая</div>
+      <div class="swatch" style="background:#E8C8E0;color:#1A0A1A;">#E8C8E0<br>Нежно-розовый</div>
+      <div class="swatch" style="background:#FDF9FB;color:#3D1A3A;border:1px solid #e0d0dd;">#FDF9FB<br>Кремово-белый</div>
+      <div class="swatch" style="background:#1A0A1A;color:#fff;">#1A0A1A<br>Почти чёрный</div>
+    </div>
+
+    <div class="demo-section">
+      <div class="demo-card">
+        <div class="hero-demo">
+          <div class="badge">Студия декора · Москва</div>
+          <h2>Волшебно оформим<br>вашу свадьбу</h2>
+          <p>Сохраним бюджет от ненужных трат. Уже более 200 пар выбрали нас.</p>
+          <button class="btn-demo">Получить 3 концепта</button>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="services-demo">
+          <h3>Наши услуги</h3>
+          <div class="service-item">
+            <div class="service-icon">🌸</div>
+            <div>
+              <div class="name">Оформление президиума</div>
+              <div class="price">от 20 000 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">💐</div>
+            <div>
+              <div class="name">Свадебная флористика</div>
+              <div class="price">от 2 500 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🎀</div>
+            <div>
+              <div class="name">Выездная регистрация</div>
+              <div class="price">от 18 000 ₽</div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-icon">🎈</div>
+            <div>
+              <div class="name">Воздушные шары</div>
+              <div class="price">от 150 ₽</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <div class="typo-demo">
+          <div class="label">Шрифты</div>
+          <div class="typo-h1">Ежевика<br>Студия</div>
+          <div class="typo-h2">Cormorant Garamond</div>
+          <div class="typo-italic">«Ваша свадьба — наше искусство»</div>
+          <div class="typo-body">Мы создаём неповторимый декор, который отражает вашу историю любви. Работаем с любым бюджетом и стилем.</div>
+          <div class="typo-btn">Jost 500 · кнопки и метки</div>
+        </div>
+      </div>
+
+      <div class="demo-card" style="background:#FDF9FB;padding:32px;display:flex;flex-direction:column;gap:16px;justify-content:center;align-items:flex-start;">
+        <div style="font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;opacity:0.45;font-family:'Jost',sans-serif;">Кнопки и акценты</div>
+        <button class="btn-demo" style="background:linear-gradient(90deg,#6B3F5E,#9B5A8A);color:#fff;">Получить концепт</button>
+        <button class="btn-demo" style="background:transparent;border:2px solid #6B3F5E;color:#6B3F5E;">Смотреть портфолио</button>
+        <button class="btn-demo" style="background:#1A0A1A;color:#fff;">Оставить заявку</button>
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <span style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6B3F5E,#9B5A8A);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;">✦</span>
+          <span style="width:36px;height:36px;border-radius:50%;background:#E8C8E0;display:flex;align-items:center;justify-content:center;color:#6B3F5E;font-size:0.8rem;">▶</span>
+          <span style="width:36px;height:36px;border-radius:50%;border:2px solid #6B3F5E;display:flex;align-items:center;justify-content:center;color:#6B3F5E;font-size:0.8rem;">✉</span>
+        </div>
+      </div>
+
+      <div class="demo-card benefits-demo">
+        <h3>Почему выбирают нас</h3>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-num">01</div>
+            <div class="benefit-text">Встреча в удобном месте</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">02</div>
+            <div class="benefit-text">Любой бюджет и стиль</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">03</div>
+            <div class="benefit-text">Единая стилистика</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">04</div>
+            <div class="benefit-text">Договор с подробной сметой</div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-num">05</div>
+            <div class="benefit-text">Более 200 довольных пар</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showVariant(id, btn) {
+    document.querySelectorAll('.variant').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('variant-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
