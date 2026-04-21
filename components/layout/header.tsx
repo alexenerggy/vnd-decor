@@ -1,109 +1,133 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import type { MouseEvent } from "react";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 
-import { ButtonLink } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
-
-const serviceRoutes = new Set([
-  "/prezidium-na-svadbu",
-  "/fotozona-na-svadbu",
-  "/svadebnaya-floristika",
-  "/oformlenie-vyezdnoy-registratsii",
-  "/oformlenie-zala-sharami-na-svadbu"
-]);
-
-type NavItem = {
-  href: string;
-  label: string;
-  isActive: (pathname: string) => boolean;
-};
-
-const navItems: NavItem[] = [
-  { href: "/", label: "Главная", isActive: (pathname) => pathname === "/" },
-  { href: "/projects", label: "Проекты", isActive: (pathname) => pathname.startsWith("/projects") },
-  { href: "/#services", label: "Услуги", isActive: (pathname) => serviceRoutes.has(pathname) },
-  { href: "/about", label: "О студии", isActive: (pathname) => pathname === "/about" },
-  { href: "/blog", label: "Блог", isActive: (pathname) => pathname.startsWith("/blog") },
-  { href: "/contacts", label: "Контакты", isActive: (pathname) => pathname === "/contacts" }
+const navItems = [
+  { href: "#services", label: "Услуги" },
+  { href: "#portfolio", label: "Портфолио" },
+  { href: "#pricing", label: "Пакеты" },
+  { href: "#testimonials", label: "Отзывы" },
+  { href: "#faq", label: "FAQ" }
 ];
 
 export function Header() {
-  const pathname = usePathname() ?? "/";
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  function handleMobileNavClick(event: MouseEvent<HTMLAnchorElement>) {
-    const details = event.currentTarget.closest("details");
-    if (details) {
-      details.removeAttribute("open");
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 80);
     }
-  }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  const headerClass = scrolled
+    ? "bg-brand-background/92 backdrop-blur-md border-b border-brand-border"
+    : "bg-transparent border-b border-transparent";
+
+  const textClass = scrolled ? "text-brand-text" : "text-white";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-brand-border/80 bg-brand-background/95 backdrop-blur">
-      <Container className="flex h-20 items-center justify-between gap-6">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="font-serif text-xl leading-none tracking-[-0.02em]">VND Decor</span>
-          <span className="hidden text-[0.68rem] uppercase tracking-[0.18em] text-brand-muted lg:block">
-            Wedding & Event Decor
-          </span>
-        </Link>
-
-        <nav aria-label="Главное меню" className="hidden items-center gap-6 text-sm md:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={item.isActive(pathname) ? "page" : undefined}
-              className={[
-                "type-kicker !text-[0.64rem] !tracking-[0.16em] transition-colors",
-                item.isActive(pathname) ? "text-brand-primary" : "text-brand-text hover:text-brand-primary"
-              ].join(" ")}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <ButtonLink href="/contacts" size="sm">
-            Оставить заявку
-          </ButtonLink>
-        </nav>
-
-        <details className="relative md:hidden">
-          <summary className="list-none cursor-pointer rounded-lg border border-brand-border px-3 py-2 text-xs uppercase tracking-[0.16em] text-brand-text">
-            Меню
-          </summary>
-          <nav
-            aria-label="Мобильное меню"
-            className="surface-card absolute right-0 top-[calc(100%+0.75rem)] z-50 w-64 p-4 shadow-card"
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-40 h-16 transition-all duration-200 ${headerClass}`}
+      >
+        <div className="container-content flex h-full items-center justify-between">
+          <Link
+            href="/"
+            aria-label="Ежевика Студия"
+            className={`font-serif text-2xl font-semibold tracking-tight transition-colors ${textClass}`}
           >
-            <ul className="space-y-2">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={item.isActive(pathname) ? "page" : undefined}
-                    onClick={handleMobileNavClick}
-                    className={[
-                      "block rounded-md px-2 py-2 text-sm transition-colors",
-                      item.isActive(pathname)
-                        ? "bg-brand-soft text-brand-primary"
-                        : "text-brand-text hover:bg-brand-soft"
-                    ].join(" ")}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-3">
-              <ButtonLink href="/contacts" className="w-full">
-                Оставить заявку
-              </ButtonLink>
-            </div>
+            Ежевика <span className="text-brand-accent">Студия</span>
+          </Link>
+
+          <nav aria-label="Главное меню" className="hidden items-center gap-8 lg:flex">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`text-sm font-medium transition-colors hover:opacity-80 ${textClass}`}
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
-        </details>
-      </Container>
-    </header>
+
+          <div className="hidden lg:block">
+            <a href="#final-cta" className="btn-primary !min-h-[44px] !py-2.5 !px-5 text-sm">
+              Бесплатный просчёт
+            </a>
+          </div>
+
+          <button
+            type="button"
+            aria-label="Открыть меню"
+            aria-expanded={mobileOpen}
+            className={`flex h-11 w-11 items-center justify-center rounded-full lg:hidden ${textClass}`}
+            onClick={() => setMobileOpen(true)}
+          >
+            <Menu className="h-6 w-6" strokeWidth={1.5} />
+          </button>
+        </div>
+      </header>
+
+      {mobileOpen ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Мобильное меню"
+          className="fixed inset-0 z-50 bg-brand-bgDark text-white animate-fade-in-up lg:hidden"
+          style={{ animationDuration: "220ms" }}
+        >
+          <div className="flex h-16 items-center justify-between px-5 sm:px-8">
+            <span className="font-serif text-2xl font-semibold">
+              Ежевика <span className="text-brand-accent">Студия</span>
+            </span>
+            <button
+              type="button"
+              aria-label="Закрыть меню"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-white"
+              onClick={() => setMobileOpen(false)}
+            >
+              <X className="h-6 w-6" strokeWidth={1.5} />
+            </button>
+          </div>
+          <nav className="flex flex-col gap-1 px-5 sm:px-8 pt-6">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="font-serif text-3xl py-3 border-b border-white/10"
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href="#final-cta"
+              onClick={() => setMobileOpen(false)}
+              className="btn-primary mt-8"
+            >
+              Бесплатный просчёт
+            </a>
+          </nav>
+        </div>
+      ) : null}
+    </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { Footer } from "@/components/layout/footer";
@@ -9,15 +10,29 @@ import { siteConfig } from "@/lib/site-config";
 
 import "@/styles/globals.css";
 
-const defaultTitle = "VND Decor — студия свадебного и event-декора";
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin", "cyrillic"],
+  weight: ["500", "600", "700"],
+  variable: "--font-cormorant",
+  display: "swap"
+});
+
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
+  display: "swap"
+});
+
+const defaultTitle = "Ежевика Студия — авторский свадебный декор в Москве";
 const defaultDescription =
-  "Премиальный декор свадеб и событий в Москве и МО: концепция, флористика, церемония и оформление под ключ.";
+  "Авторское оформление свадеб под концепцию вашей пары. Прозрачные сметы без скрытых наценок. Более 200 свадеб с 2016 года. Москва и МО.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),
   title: {
     default: defaultTitle,
-    template: "%s"
+    template: "%s · Ежевика Студия"
   },
   description: defaultDescription,
   applicationName: siteConfig.name,
@@ -43,9 +58,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={`${cormorant.variable} ${manrope.variable}`}>
       <body>
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 bg-brand-primary text-white px-4 py-2 rounded"
+        >
           Перейти к контенту
         </a>
         <JsonLd data={organizationJsonLd()} />
